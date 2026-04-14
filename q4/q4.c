@@ -81,8 +81,9 @@ int main()
         if (handle) {
         fptr operation = dlsym(handle, op);
             printf("%d\n", operation(num1, num2));
+            dlclose(handle);
         }
-        dlclose(handle);
+        
     }
 
     return 0;
