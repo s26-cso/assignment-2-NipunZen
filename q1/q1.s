@@ -74,7 +74,7 @@ get:
     addi sp, sp, -32
     sd ra, 24(sp)
     sd a0, 16(sp)
-    sd a1, 8(sp)
+    sw a1, 8(sp)
 
     
     beq a0 , x0 , condition 
@@ -121,16 +121,19 @@ getAtMost:
 
     addi t1 , t0 , 0 
 
-    ld t2, 16(a1) 
-    addi a1 , t2 , 0 
-    lw a0 , 16(sp)
+    sw t0, 0(sp)        
 
-    call getAtMost 
+    ld t2, 16(a1)
+    addi a1, t2, 0
+    lw a0, 16(sp)
 
-    bge t1 , a0 , candi 
+    call getAtMost
+
+    lw t1, 0(sp)
+    li t2, -1
+    beq a0, t2, candi  
+
     jal x0 , BACK
-
-
 
 candi : 
     addi a0 , t1,  0 
